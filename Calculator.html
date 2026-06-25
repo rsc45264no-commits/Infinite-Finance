@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Financial Calculators</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    .calculator {
+      background: rgba(255, 255, 255, 0.1);
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 320px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    input, button {
+      margin: 5px;
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      background: #ff9800;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e68900;
+    }
+    .result {
+      margin-top: 10px;
+      font-weight: bold;
+      text-align: left;
+    }
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      background: rgba(0,0,0,0.3);
+      border-top: 2px solid #ff9800;
+    }
+    footer a {
+      color: #ff9800;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>💰 Financial Return Calculators</h1>
+
+  <!-- SIP Calculator -->
+  <div class="calculator">
+    <h2>SIP Calculator</h2>
+    <input type="number" id="sipAmount" placeholder="Monthly Investment">
+    <input type="number" id="sipRate" placeholder="Annual Rate (%)">
+    <input type="number" id="sipYears" placeholder="Years">
+    <button onclick="calculateSIP()">Calculate</button>
+    <div class="result" id="sipResult"></div>
+  </div>
+
+  <!-- SWP Calculator -->
+  <div class="calculator">
+    <h2>SWP Calculator</h2>
+    <input type="number" id="swpAmount" placeholder="Withdrawal Amount">
+    <input type="number" id="swpRate" placeholder="Annual Rate (%)">
+    <input type="number" id="swpYears" placeholder="Years">
+    <button onclick="calculateSWP()">Calculate</button>
+    <div class="result" id="swpResult"></div>
+  </div>
+
+  <!-- FD Calculator -->
+  <div class="calculator">
+    <h2>FD Calculator</h2>
+    <input type="number" id="fdAmount" placeholder="Principal">
+    <input type="number" id="fdRate" placeholder="Annual Rate (%)">
+    <input type="number" id="fdYears" placeholder="Years">
+    <button onclick="calculateFD()">Calculate</button>
+    <div class="result" id="fdResult"></div>
+  </div>
+
+  <!-- Gold Calculator -->
+  <div class="calculator">
+    <h2>Gold Return Calculator</h2>
+    <input type="number" id="goldAmount" placeholder="Investment Amount">
+    <input type="number" id="goldRate" placeholder="Annual Growth (%)">
+    <input type="number" id="goldYears" placeholder="Years">
+    <button onclick="calculateGold()">Calculate</button>
+    <div class="result" id="goldResult"></div>
+  </div>
+
+  <!-- Silver Calculator -->
+  <div class="calculator">
+    <h2>Silver Return Calculator</h2>
+    <input type="number" id="silverAmount" placeholder="Investment Amount">
+    <input type="number" id="silverRate" placeholder="Annual Growth (%)">
+    <input type="number" id="silverYears" placeholder="Years">
+    <button onclick="calculateSilver()">Calculate</button>
+    <div class="result" id="silverResult"></div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>📷 Instagram: <a href="https://www.instagram.com/infinitefinance_26/" target="_blank">infinitefinance_26</a></p>
+    <p>📝 Blogger: <a href="https://www.blogger.com/blog/posts/4796697634214703015?hl=en&tab=jj" target="_blank">Infinite Finance Blog</a></p>
+    <p>👑 Owned By: Abarman and Chanjaivi</p>
+    <p>📧 Email: <a href="mailto:Infiniteltd@gmail.com">Infiniteltd@gmail.com</a></p>
+  </footer>
+
+  <script>
+    function calculateSIP() {
+      let P = parseFloat(document.getElementById("sipAmount").value);
+      let r = parseFloat(document.getElementById("sipRate").value) / 100 / 12;
+      let n = parseFloat(document.getElementById("sipYears").value) * 12;
+      let futureValue = P * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+      let invested = P * n;
+      let returns = futureValue - invested;
+      document.getElementById("sipResult").innerHTML =
+        `Invested Amount: ₹${invested.toFixed(2)}<br>
+         Returns: ₹${returns.toFixed(2)}<br>
+         Total Value: ₹${futureValue.toFixed(2)}`;
+    }
+
+    function calculateSWP() {
+      let W = parseFloat(document.getElementById("swpAmount").value);
+      let n = parseFloat(document.getElementById("swpYears").value) * 12;
+      let invested = W * n; 
+      let returns = 0; 
+      document.getElementById("swpResult").innerHTML =
+        `Invested Amount: ₹${invested.toFixed(2)}<br>
+         Returns: ₹${returns.toFixed(2)}<br>
+         Total Value: ₹${invested.toFixed(2)}`;
+    }
+
+    function calculateFD() {
+      let P = parseFloat(document.getElementById("fdAmount").value);
+      let r = parseFloat(document.getElementById("fdRate").value) / 100;
+      let t = parseFloat(document.getElementById("fdYears").value);
+      let maturity = P * Math.pow((1 + r), t);
+      let returns = maturity - P;
+      document.getElementById("fdResult").innerHTML =
+        `Invested Amount: ₹${P.toFixed(2)}<br>
+         Returns: ₹${returns.toFixed(2)}<br>
+         Total Value: ₹${maturity.toFixed(2)}`;
+    }
+
+    function calculateGold() {
+      let P = parseFloat(document.getElementById("goldAmount").value);
+      let r = parseFloat(document.getElementById("goldRate").value) / 100;
+      let t = parseFloat(document.getElementById("goldYears").value);
+      let value = P * Math.pow((1 + r), t);
+      let returns = value - P;
+      document.getElementById("goldResult").innerHTML =
+        `Invested Amount: ₹${P.toFixed(2)}<br>
+         Returns: ₹${returns.toFixed(2)}<br>
+         Total Value: ₹${value.toFixed(2)}`;
+    }
+
+    function calculateSilver() {
+      let P = parseFloat(document.getElementById("silverAmount").value);
+      let r = parseFloat(document.getElementById("silverRate").value) / 100;
+      let t = parseFloat(document.getElementById("silverYears").value);
+      let value = P * Math.pow((1 + r), t);
+      let returns = value - P;
+      document.getElementById("silverResult").innerHTML =
+        `Invested Amount: ₹${P.toFixed(2)}<br>
+         Returns: ₹${returns.toFixed(2)}<br>
+         Total Value: ₹${value.toFixed(2)}`;
+    }
+
+  <h1>💰 Financial Return Calculators</h1>
+
+  <!-- (Calculators remain unchanged) -->
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-icons">📷 Instagram: 
+      <a href="https://www.instagram.com/infinitefinance_26/" target="_blank">@infinitefinance_26</a>
+    </div>
+    <div class="footer-icons">📝 Blogger: 
+      <a href="https://www.blogger.com/blog/posts/4796697634214703015?hl=en&tab=jj" target="_blank">Infinite Finance Blog</a>
+    </div>
+    <div class="footer-icons">👑 Owned By: <strong>Abarman and Chanjaivi</strong></div>
+    <div class="footer-icons">📧 Email: 
+      <a href="mailto:Infiniteltd@gmail.com">Infiniteltd@gmail.com</a>
+    </div>
+  </footer>
+
+  <script>
+    // (Calculator functions remain unchanged)
+  </script>
+</body>
+</html>
